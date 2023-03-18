@@ -1,0 +1,34 @@
+* {
+  background-color: #202124;
+  --bs-toast-header-bg: #202124;
+  --bs-body-bg: #202124;
+  --bs-body-color: #e8eaed;
+  --bs-border-color: #303134;
+}
+
+input.form-control,
+select.form-select,
+input.form-check-input {
+  border: none;
+  color: #e8eaed;
+  background-color: #303134;
+}
+
+input.form-control:focus,
+select.form-select:focus {
+  color: #e8eaed;
+  background-color: #323337;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.form-label {
+  text-align: start;
+  margin-right: 12px;
+  min-width: 72px;
+}
