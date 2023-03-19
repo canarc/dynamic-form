@@ -6,10 +6,13 @@ type formItemCardProps = {
   formKey: string;
   onDeleteClick: (e: MouseEvent<HTMLElement>) => void;
   onClick: (e: MouseEvent<HTMLElement>) => void;
+  searchValue: string;
 };
 
-function FormItemCard({ formKey, onDeleteClick, onClick }: formItemCardProps) {
+function FormItemCard({ formKey, onDeleteClick, onClick, searchValue }: formItemCardProps) {
   const formData = JSON.parse(localStorage.getItem(formKey)!) as FormModel;
+
+  if (formData.name.toLowerCase().indexOf(searchValue.toLowerCase()) === -1) return null;
 
   return (
     <Row role="button" onClick={onClick} className="d-flex border rounded mt-3 align-content-center w-100 m-0 pointer">

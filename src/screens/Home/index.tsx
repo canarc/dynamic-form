@@ -1,18 +1,23 @@
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import FormItemCard from '../../components/FormItemCard';
 import { useForceUpdate } from '../../helpers/helperFunctions';
+import CreateForm from '../CreateForm';
 import FirstAttend from './FirstAttend';
 
 function Home() {
   const forceUpdate = useForceUpdate();
-  const isFirstAttend = localStorage.getItem('isFirstAttend') !== 'false';
   const navigate = useNavigate();
+  const [search, setSearch] = useState('');
+  const [isCreateFormModalEnabled, setIsCreateFormModalEnabled] = useState(false);
+  const isFirstAttend = localStorage.getItem('isFirstAttend') !== 'false';
 
   if (isFirstAttend) return <FirstAttend />;
 
   const onCreateFormClick = () => {
-    navigate('/createForm');
+    setIsCreateFormModalEnabled(true);
   };
 
   const onDeleteFormClick = (key: string) => {
@@ -27,7 +32,10 @@ function Home() {
   return (
     <Container>
       <Row className="d-flex justify-content-center align-items-center pb-3">
-        <h2 className="w-auto">List of Your Forms</h2>
+        <Col className="d-flex flex-column align-items-start w-min">
+          <h2>List of Your Forms</h2>
+          <Form.Control className="w-auto" placeholder="Search" value={search} onChange={(event) => setSearch(event.target.value)} />
+        </Col>
         <Button className="w-auto ms-auto" onClick={onCreateFormClick}>
           Create New Form
         </Button>
@@ -46,11 +54,21 @@ function Home() {
                 onClick={(e) => {
                   onViewFormClick(key);
                 }}
+                searchValue={search}
                 formKey={key}
               />
             ))}
         </Col>
       </Row>
+      {createPortal(
+        <CreateForm
+          isOpen={isCreateFormModalEnabled}
+          onClose={() => {
+            setIsCreateFormModalEnabled(false);
+          }}
+        />,
+        document.body
+      )}
     </Container>
   );
 }

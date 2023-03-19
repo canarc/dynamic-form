@@ -14,10 +14,6 @@ const router = createBrowserRouter(
       element: <Home />,
     },
     {
-      path: '/createForm',
-      element: <CreateForm />,
-    },
-    {
       path: '/viewForm/:formKey',
       element: <ViewForm />,
     },
