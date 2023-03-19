@@ -7,20 +7,25 @@ import Home from './screens/Home';
 import CreateForm from './screens/CreateForm';
 import ViewForm from './screens/ViewForm';
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: <Home />,
+    },
+    {
+      path: '/createForm',
+      element: <CreateForm />,
+    },
+    {
+      path: '/viewForm/:formKey',
+      element: <ViewForm />,
+    },
+  ],
   {
-    path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/createForm',
-    element: <CreateForm />,
-  },
-  {
-    path: '/viewForm/:formKey',
-    element: <ViewForm />,
-  },
-]);
+    basename: '/form-generator',
+  }
+);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   /*   <React.StrictMode>

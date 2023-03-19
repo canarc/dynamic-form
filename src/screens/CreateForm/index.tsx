@@ -55,37 +55,39 @@ function CreateForm() {
   };
 
   return (
-    <Form onSubmit={onCreate}>
-      <h2 className="mb-4">Create Your Form</h2>
-      <Container>
-        <Col>
-          <Form.Group className="d-flex gap-2 align-items-center mb-3">
-            <Form.Label>Form Name</Form.Label>
-            <Form.Control maxLength={20} name="name" required type="text" placeholder="Enter form name" onChange={(event) => handleFormChange(event)} />
-          </Form.Group>
-
-          <Form.Group className="d-flex gap-2 align-items-center mb-3">
-            <Form.Label>Description</Form.Label>
-            <Form.Control maxLength={35} name="description" required type="text" placeholder="Enter description" onChange={(event) => handleFormChange(event)} />
-          </Form.Group>
-
-          <div className="border-bottom w-100 h-1 mb-3"></div>
-
-          {formValues.fields.map((field, index) => {
-            return <FormField key={`formfield${index}`} field={field} index={index} handleFormChange={handleFormChange} onRemoveFieldClick={onRemoveFieldClick} />;
-          })}
-          <Button variant="secondary" onClick={onAddNewFieldClick}>
-            Add New Form Field
-          </Button>
-          <br />
-          <br />
-          <Button className="w-25" size="lg" variant="primary" type="submit">
-            Create
-          </Button>
-        </Col>
-      </Container>
+    <>
       {createPortal(<MyToast title="Warning" message={warningMessage} isVisible={isWarningVisible} setIsVisible={setIsWarningVisible} duration={500000} />, document.body)}
-    </Form>
+      <Form onSubmit={onCreate}>
+        <h2 className="mb-4">Create Your Form</h2>
+        <Container>
+          <Col>
+            <Form.Group className="d-flex gap-2 align-items-center mb-3">
+              <Form.Label>Form Name</Form.Label>
+              <Form.Control maxLength={20} name="name" required type="text" placeholder="Enter form name" onChange={(event) => handleFormChange(event)} />
+            </Form.Group>
+
+            <Form.Group className="d-flex gap-2 align-items-center mb-3">
+              <Form.Label>Description</Form.Label>
+              <Form.Control maxLength={35} name="description" required type="text" placeholder="Enter description" onChange={(event) => handleFormChange(event)} />
+            </Form.Group>
+
+            <div className="border-bottom w-100 h-1 mb-3"></div>
+
+            {formValues.fields.map((field, index) => {
+              return <FormField key={`formfield${index}`} field={field} index={index} handleFormChange={handleFormChange} onRemoveFieldClick={onRemoveFieldClick} />;
+            })}
+            <Button variant="secondary" onClick={onAddNewFieldClick}>
+              Add New Form Field
+            </Button>
+            <br />
+            <br />
+            <Button className="w-auto" size="lg" variant="primary" type="submit">
+              Create
+            </Button>
+          </Col>
+        </Container>
+      </Form>
+    </>
   );
 }
 export default CreateForm;

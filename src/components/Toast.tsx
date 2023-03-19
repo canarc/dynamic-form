@@ -18,7 +18,7 @@ function MyToast({ isVisible, setIsVisible, message, title, position, duration }
   if (duration) setTimeout(() => setIsVisible(false), duration);
 
   return (
-    <ToastContainer className="p-3" position={position || 'bottom-center'}>
+    <ToastContainer className="mb-5" containerPosition="fixed" position={position || 'bottom-center'}>
       <Toast onClose={toggleShowA} show={isVisible} animation>
         {title && (
           <Toast.Header>
